@@ -1,5 +1,8 @@
 package com.tts.subscriberList.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,8 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.tts.subscriberList.models.Subscriber;
 import com.tts.subscriberList.repository.SubscriberRepository;
-
-import antlr.collections.List;
 
 @Controller
 public class SubscriberController {
@@ -33,8 +34,9 @@ public class SubscriberController {
 	
 	@GetMapping(value = "/subscribers")
 	public String getAllSubscribers(Model model) {
-		List subsubscriberList = (List) subscriberRepository.findAll();
-		model.addAttribute("list", subsubscriberList);
+		List<Subscriber> subscriberList = new ArrayList<Subscriber>();
+		subscriberList = (List<Subscriber>) subscriberRepository.findAll();
+		model.addAttribute("subscriberList", subscriberList);
 		return "subscriber/subscribers";
 	}
 }
